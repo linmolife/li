@@ -28,8 +28,9 @@ window.addEventListener('resize', () => {
         navLinks.style.display = 'none';
     }
 });
+
 // 新增互动功能
-document.querySelectorAll('.product-item').forEach(item => {
+document.querySelectorAll('.product-card').forEach(item => {
     item.addEventListener('mouseenter', () => {
         item.style.transform = 'rotate(2deg) scale(1.05)';
     });
@@ -61,7 +62,8 @@ style.textContent = `
 }
 `;
 document.head.appendChild(style);
-// 在scripts.js中添加
+
+// 平滑滚动
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -75,106 +77,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-// 表单提交处理（更新后代码）
-document.querySelector('.custom-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const submitBtn = this.querySelector('button[type="submit"]');
-    
-    // 添加按钮loading状态
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中...';
-    submitBtn.disabled = true;
 
-    // 获取表单数据
-    const formData = new FormData(this);
-    
-    // 验证逻辑
-    if(!formData.get('name') || !formData.get('phone') || !formData.get('email')) {
-        Swal.fire({
-            icon: 'error',
-            title: '哎呀...',
-            text: '请填写所有必填项哦~ ✨',
-            confirmButtonColor: '#ff85a2'
-        });
-        submitBtn.innerHTML = '<i class="fas fa-magic"></i> 提交定制需求';
-        submitBtn.disabled = false;
-        return;
-    }
-
-    // 模拟异步提交（实际使用时替换为真实API调用）
-    setTimeout(() => {
-        // 显示成功提示
-        Swal.fire({
-            icon: 'success',
-            title: '✨ 提交成功 ✨',
-            html: '<div class="success-message">' +
-                  '<i class="fas fa-check-circle"></i>' +
-                  '<p>我们会在24小时内联系您~</p>' +
-                  '</div>',
-            confirmButtonColor: '#ff85a2',
-            customClass: {
-                popup: 'custom-swal-popup',
-                title: 'custom-swal-title'
-            },
-            didClose: () => {
-                this.reset();
-                submitBtn.innerHTML = '<i class="fas fa-magic"></i> 提交定制需求';
-                submitBtn.disabled = false;
-            }
-        });
-    }, 1000); // 模拟1秒延迟
-});
-
-
-// 更新后的轮播图逻辑
-let currentIndex = 0;
-const items = document.querySelectorAll('.carousel-item');
-const dotsContainer = document.querySelector('.carousel-dots');
-const track = document.querySelector('.carousel-track');
-
-// 初始化指示点
-items.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if(index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(index));
-    dotsContainer.appendChild(dot);
-});
-
-function updateCarousel() {
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    items.forEach((item, i) => {
-        item.classList.toggle('active', i === currentIndex);
-    });
-    document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-    });
-}
-
-function goToSlide(index) {
-    currentIndex = (index + items.length) % items.length;
-    updateCarousel();
-}
-
-function nextSlide() {
-    currentIndex = (currentIndex + 1) % items.length;
-    updateCarousel();
-}
-
-function prevSlide() {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-    updateCarousel();
-}
-
-// 按钮事件
-document.querySelector('.right-btn').addEventListener('click', nextSlide);
-document.querySelector('.left-btn').addEventListener('click', prevSlide);
-
-// 自动播放
-let autoPlay = setInterval(nextSlide, 5000);
-
-// 鼠标悬停暂停
-track.addEventListener('mouseenter', () => clearInterval(autoPlay));
-track.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, 5000));
 
 
 
@@ -264,12 +167,3 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTopButton.style.backgroundColor = '#ff6392';
     });
 });
-
-
-
-
-
-
-
-
-
