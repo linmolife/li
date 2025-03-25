@@ -1,22 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 平滑滚动
-    initSmoothScroll();
-    // 响应式导航栏功能
-    initResponsiveNav();
-    // 点击爱心特效
-    initHeartEffect();
-    // 添加分享功能和回到顶部按钮
-    initShareAndTopButton();
-    // 表单功能优化
-    initFormFeatures();
-    // 图片懒加载
-    initLazyLoading();
-    // 动态效果 - 星星和月亮
-    initDynamicEffects();
-});
-
-// 平滑滚动功能
-function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -30,38 +13,34 @@ function initSmoothScroll() {
             }
         });
     });
-}
 
-// 响应式导航栏功能
-function initResponsiveNav() {
+    // 响应式导航栏功能
     const navLinks = document.querySelector('.nav-links');
     function updateNavDisplay() {
-        navLinks.style.display = window.innerWidth > 768 ? 'flex' : 'none';
+        if (window.innerWidth > 768) {
+            navLinks.style.display = 'flex';
+        } else {
+            navLinks.style.display = 'none';
+        }
     }
     updateNavDisplay();
     window.addEventListener('resize', updateNavDisplay);
-}
 
-// 点击爱心特效
-function initHeartEffect() {
-    document.body.addEventListener('click', (e) => {
-        if (e.target.closest('.feature-card')) {
-            createHeartEffect(e.pageX, e.pageY);
+    // 点击爱心特效
+    document.body.addEventListener('click', function(e) {
+        if(e.target.closest('.feature-card')) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'absolute';
+            heart.style.left = e.pageX + 'px';
+            heart.style.top = e.pageY + 'px';
+            heart.style.animation = 'floatUp 1s ease-out';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1000);
         }
     });
 
-    function createHeartEffect(x, y) {
-        const heart = document.createElement('div');
-        heart.innerHTML = '❤️';
-        heart.style.position = 'absolute';
-        heart.style.left = `${x}px`;
-        heart.style.top = `${y}px`;
-        heart.style.animation = 'floatUp 1s ease-out';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
-    }
-
-    // 添加动画样式
+    // 添加动画
     const style = document.createElement('style');
     style.textContent = `
         @keyframes floatUp {
@@ -70,36 +49,8 @@ function initHeartEffect() {
         }
     `;
     document.head.appendChild(style);
-}
 
-// 分享功能和回到顶部按钮
-function initShareAndTopButton() {
-    // 创建分享按钮
-    const shareButton = createShareButton();
-    // 创建回到顶部按钮
-    const backToTopButton = createBackToTopButton();
-    // 滚动事件监听
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            shareButton.classList.add('show');
-            backToTopButton.style.opacity = '1';
-        } else {
-            shareButton.classList.remove('show');
-            backToTopButton.style.opacity = '0';
-        }
-    });
-    // 点击按钮回到顶部
-    backToTopButton.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    // 悬停效果
-    addHoverEffects(backToTopButton);
-}
-
-function createShareButton() {
+    // 添加分享功能
     const shareButton = document.createElement('button');
     shareButton.id = 'share-button';
     shareButton.innerHTML = '<i class="fas fa-share"></i> 分享页面';
@@ -115,67 +66,78 @@ function createShareButton() {
     shareButton.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
     shareButton.style.zIndex = '1000';
     document.body.appendChild(shareButton);
-    shareButton.addEventListener('click', handleShareClick);
-    return shareButton;
-}
 
-function createBackToTopButton() {
-    const backToTopButton = document.createElement('button');
-    backToTopButton.id = 'back-to-top';
-    backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    backToTopButton.style.position = 'fixed';
-    backToTopButton.style.bottom = '20px';
-    backToTopButton.style.left = '20px';
-    backToTopButton.style.width = '40px';
-    backToTopButton.style.height = '40px';
-    backToTopButton.style.borderRadius = '50%';
-    backToTopButton.style.backgroundColor = '#ff6392';
-    backToTopButton.style.color = 'white';
-    backToTopButton.style.border = 'none';
-    backToTopButton.style.cursor = 'pointer';
-    backToTopButton.style.opacity = '0';
-    backToTopButton.style.transition = 'opacity 0.3s ease';
-    backToTopButton.style.zIndex = '1000';
-    backToTopButton.style.display = 'flex';
-    backToTopButton.style.alignItems = 'center';
-    backToTopButton.style.justifyContent = 'center';
-    backToTopButton.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-    document.body.appendChild(backToTopButton);
-    return backToTopButton;
-}
-
-function addHoverEffects(button) {
-    button.addEventListener('mouseenter', () => {
-        button.style.backgroundColor = '#ff4757';
+    shareButton.addEventListener('click', function() {
+        if (navigator.share) {
+            navigator.share({
+                title: '梦幻玩偶工坊 - 关于我们',
+                url: window.location.href
+            })
+            .catch(error => console.log('分享失败:', error));
+        } else {
+            alert('您的浏览器不支持原生分享功能，请手动复制链接分享');
+        }
     });
-    button.addEventListener('mouseleave', () => {
-        button.style.backgroundColor = '#ff6392';
-    });
-}
 
-function handleShareClick() {
-    if (navigator.share) {
-        navigator.share({
-            title: '梦幻玩偶工坊 - 关于我们',
-            url: window.location.href
-        }).catch(error => console.log('分享失败:', error));
-    } else {
-        alert('您的浏览器不支持原生分享功能，请手动复制链接分享');
-    }
-}
+        // 创建回到顶部按钮
+        const backToTopButton = document.createElement('button');
+        backToTopButton.id = 'back-to-top';
+        backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        backToTopButton.style.position = 'fixed';
+        backToTopButton.style.bottom = '20px';
+        backToTopButton.style.left = '20px';
+        backToTopButton.style.width = '40px';
+        backToTopButton.style.height = '40px';
+        backToTopButton.style.borderRadius = '50%';
+        backToTopButton.style.backgroundColor = '#ff6392';
+        backToTopButton.style.color = 'white';
+        backToTopButton.style.border = 'none';
+        backToTopButton.style.cursor = 'pointer';
+        backToTopButton.style.opacity = '0';
+        backToTopButton.style.transition = 'opacity 0.3s ease';
+        backToTopButton.style.zIndex = '1000';
+        backToTopButton.style.display = 'flex';
+        backToTopButton.style.alignItems = 'center';
+        backToTopButton.style.justifyContent = 'center';
+        backToTopButton.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        
+        document.body.appendChild(backToTopButton);
+    
+        // 滚动事件监听
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                shareButton.classList.add('show');
+                backToTopButton.style.opacity = '1';
+            } else {
+                shareButton.classList.remove('show');
+                backToTopButton.style.opacity = '0';
+            }
+        });
+    
+        // 点击按钮回到顶部
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    
+        // 悬停效果
+        backToTopButton.addEventListener('mouseenter', () => {
+            backToTopButton.style.backgroundColor = '#ff4757';
+        });
+    
+        backToTopButton.addEventListener('mouseleave', () => {
+            backToTopButton.style.backgroundColor = '#ff6392';
+        });
 
-// 表单功能优化
-function initFormFeatures() {
-    const form = document.querySelector('.custom-form');
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    // 自动生成订单编号
-    form.addEventListener('input', function(e) {
+    // 优化表单功能 - 自动生成订单编号
+    document.querySelector('.custom-form').addEventListener('input', function(e) {
         if (e.target.id === 'name') {
             const name = e.target.value.trim();
             if (name) {
                 const orderNumber = generateOrderNumber(name);
-                submitBtn.dataset.orderNumber = orderNumber;
+                document.querySelector('.submit-btn').dataset.orderNumber = orderNumber;
             }
         }
     });
@@ -186,16 +148,17 @@ function initFormFeatures() {
         return `${timestamp}-${nameHash}`;
     }
 
-    // 表单提交时使用订单编号
-    form.addEventListener('submit', function(e) {
+    // 在表单提交时使用订单编号
+    document.querySelector('.custom-form').addEventListener('submit', function(e) {
         e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
         const orderNumber = submitBtn.dataset.orderNumber;
         const formData = new FormData(this);
         formData.append('orderNumber', orderNumber);
     });
 
-    // 表单验证
-    form.addEventListener('submit', function(e) {
+    // 优化表单验证
+    document.querySelector('.custom-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(this);
         if (!formData.get('name') || !formData.get('phone') || !formData.get('email')) {
@@ -212,10 +175,8 @@ function initFormFeatures() {
             confirmButtonColor: '#ff85a2'
         });
     }
-}
 
-// 图片懒加载
-function initLazyLoading() {
+    // 图片懒加载
     const lazyImages = document.querySelectorAll('.image-lazy');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -230,21 +191,8 @@ function initLazyLoading() {
     lazyImages.forEach(img => {
         observer.observe(img);
     });
-}
 
-// 动态效果 - 星星和月亮
-function initDynamicEffects() {
-    // 创建星星
-    createStars();
-    // 创建月亮动画
-    initMoonAnimation();
-    // 创建粒子效果
-    createParticles();
-    // 创建波浪效果
-    initWaveEffect();
-}
-
-function createStars() {
+    // 动态效果 - 星星和月亮
     const starsContainer = document.querySelector('.stars');
     for (let i = 0; i < 50; i++) {
         const star = document.createElement('div');
@@ -260,26 +208,25 @@ function createStars() {
         star.style.animationDelay = `${delay}s`;
         starsContainer.appendChild(star);
     }
-}
 
-function initMoonAnimation() {
     setTimeout(() => {
         document.querySelector('.moon').style.animation = 'moonFade 10s infinite';
     }, 3000);
-}
 
-function createParticles() {
-    const container = document.querySelector('.craft-particles');
-    for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'craft-particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 3 + 's';
-        container.appendChild(particle);
+    // 粒子生成器
+    function createCraftParticles() {
+        const container = document.querySelector('.craft-particles');
+        for(let i=0; i<30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'craft-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            container.appendChild(particle);
+        }
     }
-}
+    createCraftParticles();
 
-function initWaveEffect() {
+    // 自动暂停动画当元素不可见时
     const waveObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             entry.target.querySelector('path').style.animationPlayState = 
@@ -287,4 +234,8 @@ function initWaveEffect() {
         });
     });
     document.querySelectorAll('.wave-divider').forEach(el => waveObserver.observe(el));
-}
+});
+
+
+
+
