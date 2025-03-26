@@ -38,4 +38,18 @@ document.addEventListener('DOMContentLoaded', function() {
     initProductImageLoading();
     initThemeTitleAnimation();
     initShareAndTopButton();
+    initFormSubmission();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+    } else {
+        console.error('未找到按钮或导航菜单元素！');
+    }
 });

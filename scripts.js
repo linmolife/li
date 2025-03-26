@@ -109,6 +109,26 @@ function handleResponsiveNav() {
         navLinks.style.display = window.innerWidth > 768 ? 'flex' : 'none';
     });
 }
+// ===== 移动端导航菜单功能 =====
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+    
+    // 点击链接后自动关闭菜单
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            }
+        });
+    });
+}
 
 // ===== 产品卡片交互效果 =====
 /**
@@ -364,6 +384,7 @@ function initShareAndTopButton() {
 function initAllFeatures() {
     initCarousel(); // 轮播图
     handleResponsiveNav(); // 响应式导航
+    initMobileMenu();// 移动端导航
     initProductItemInteraction(); // 产品卡片交互
     initHeartEffect(); // 爱心点击效果
     initSmoothScroll(); // 平滑滚动

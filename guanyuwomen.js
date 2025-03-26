@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     // 响应式导航栏功能
     initResponsiveNav();
+    // 移动端菜单
+    initMobileMenu();
     // 点击爱心特效
     initHeartEffect();
     // 添加分享功能和回到顶部按钮
@@ -13,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initLazyLoading();
     // 动态效果 - 星星和月亮
     initDynamicEffects();
+    // 表单提交成功
+    initFormSubmission();
 });
 
 // 平滑滚动功能
@@ -40,6 +44,27 @@ function initResponsiveNav() {
     }
     updateNavDisplay();
     window.addEventListener('resize', updateNavDisplay);
+}
+
+// 移动端导航菜单功能
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+    
+    // 点击链接后自动关闭菜单
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            }
+        });
+    });
 }
 
 // 点击爱心特效
