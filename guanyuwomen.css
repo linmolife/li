@@ -209,90 +209,6 @@
     margin-bottom: 1rem;
 }
 
-/* 页脚样式 */
-.main-footer {
-    background: #2b2b2b;
-    color: white;
-    padding: 3rem 2rem 1rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    place-items: center;
-}
-
-.contact-info {
-    text-align: center;
-}
-
-.contact-info h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 1.2rem 0;
-    justify-content: center;
-}
-
-.contact-item i {
-    font-size: 1.5rem;
-    color: #ff85a2;
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-}
-
-.social-links {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.social-icon {
-    position: relative;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    display: grid;
-    place-items: center;
-    transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.social-icon:hover {
-    transform: translateY(-5px);
-    background: #ff85a2;
-}
-
-.social-icon i {
-    font-size: 1.4rem;
-    color: white;
-    transition: 0.3s;
-}
-
-.copyright {
-    text-align: center;
-    margin-top: 3rem;
-    padding: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.8);
-}
-
 /* 响应式设计 */
 @media (max-width: 768px) {
     .brand-story,
@@ -308,11 +224,6 @@
         padding-left: 0;
     }
 }
-
-
-
-
-/* guanyuwomen.css */
 
 /* 引入可爱字体 */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
@@ -335,22 +246,6 @@
     line-height: 1.8;
 }
 
-/* 特殊服务板块字体 */
-.feature-card h3, .feature-card p {
-    font-family: 'Dancing Script', cursive;
-}
-
-/* 表单相关字体 */
-.custom-form label, .custom-form input::placeholder {
-    font-family: 'Noto Sans SC', sans-serif;
-}
-
-/* 页脚字体 */
-.contact-info p, .social-links .tooltip {
-    font-family: 'Noto Sans SC', sans-serif;
-}
-/* guanyuwomen.css */
-
 /* 图片懒加载 */
 .image-lazy {
     opacity: 0;
@@ -360,7 +255,6 @@
 .image-lazy.loaded {
     opacity: 1;
 }
-
 
 /* 动态效果样式 */
 .animation-container {
@@ -414,11 +308,6 @@
     100% { opacity: 1; }
 }
 
-
-
-
-
-
 /* 粒子动画 */
 .craft-particles {
     position: absolute;
@@ -452,6 +341,7 @@
         opacity: 0;
     }
 }
+
 /* 头盔悬浮动画 */
 .craft-helmet {
     position: absolute;
@@ -468,11 +358,13 @@
     opacity: 1;
     filter: drop-shadow(0 5px 10px rgba(255,215,0,0.5));
 }
+
 @keyframes moonFade {
     0% { opacity: 0; transform: translateY(-20px); }
     50% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(20px); }
 }
+
 .brand-story-img {
     width: 100%;
     height: auto;
