@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initThemeTitleAnimation();
     initShareAndTopButton();
     initFormSubmission();
+    initLoginModal(); 
 });
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.querySelector('.mobile-menu-btn');

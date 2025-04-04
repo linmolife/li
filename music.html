@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦幻玩偶工坊音乐</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .music-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255,182,193,0.3);
+            text-align: center;
+        }
+
+        .music-player {
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff85a2;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            background: #ff6b9d;
+        }
+
+        .song-list {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .song-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: #fff5f7;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .song-item:hover {
+            background: #ffebef;
+            transform: translateX(10px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <!-- 复用原有导航栏代码 -->
+        <div class="nav-container">
+            <a href="index.html" class="logo">梦幻玩偶</a>
+            <div class="nav-links">
+                <a href="index.html">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="music-container magic-box">
+        <h2>👑 皇家公主主题音乐 👑</h2>
+        <div class="music-player">
+            <audio id="mainPlayer" controls>
+                <source src="music/hjyy.mp3" type="audio/mpeg">
+                您的浏览器不支持音频播放
+            </audio>
+        </div>
+
+        <div class="song-list">
+            <div class="song-item" data-src="music/princess-theme.mp3">
+                ✨ 公主圆舞曲 - 皇家舞会主题
+            </div>
+            <div class="song-item" data-src="music/castle-melody.mp3">
+                🏰 城堡月光曲 - 睡前安眠音乐
+            </div>
+            <div class="song-item" data-src="music/magic-dance.mp3">
+                💃 魔法舞步 - 换装场景音乐
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const player = document.getElementById('mainPlayer');
+        const songs = document.querySelectorAll('.song-item');
+        
+        songs.forEach(song => {
+            song.addEventListener('click', () => {
+                const src = song.dataset.src;
+                player.src = src;
+                player.play();
+                songs.forEach(s => s.style.background = '#fff5f7');
+                song.style.background = '#ffe8e8';
+            });
+        });
+
+        // 初始化播放器样式
+        const audioElements = document.querySelectorAll('audio');
+        audioElements.forEach(audio => {
+            audio.style.width = '100%';
+            audio.style.height = '50px';
+            audio.style.borderRadius = '25px';
+        });
+    </script>
+</body>
+</html>

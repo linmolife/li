@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦幻公主城堡</title>
+    <link rel="stylesheet" href="starlight-spirits.css">
+    <link rel="stylesheet" href="starlight-spirits2.css">
+</head>
+<body>
+    <div class="container">
+        <h1 data-text="梦幻公主城堡">🏰 梦幻公主城堡</h1>
+        
+        <!-- 图片模态框 -->
+        <div id="imageModal" class="modal">
+            <span class="close">❌</span>
+            <img class="modal-content" id="expandedImg">
+        </div>
+
+        <img src="image/lunbo2.jpg" alt="梦幻公主城堡全景" class="main-image" id="castleImage">
+        
+        <div class="content">
+            <p class="animate-on-scroll">💖 欢迎来到童话世界最璀璨的明珠——梦幻公主城堡！这座始建于星月历2023年的魔法城堡，由皇家建筑精灵耗时99天建造完成...</p>
+            
+            <div class="castle-feature">
+                <h2>🌈 城堡亮点</h2>
+                <ul>
+                    <li>72座镶金尖塔与水晶穹顶</li>
+                    <li>漂浮云端的空中花园</li>
+                    <li>会说话的魔法壁画长廊</li>
+                    <li>午夜自动奏响的水晶音乐厅</li>
+                </ul>
+            </div>
+
+            <div class="activity-section">
+                <h2>🎪 特色体验</h2>
+                <div class="activity-grid">
+                    <div class="activity-card">
+                        <h3>👑 加冕仪式</h3>
+                        <p>每日10:00/15:00/19:00</p>
+                        <button class="reserve-btn">预约体验</button>
+                    </div>
+                    <div class="activity-card">
+                        <h3>🦄 独角兽巡游</h3>
+                        <p>每周三、六下午14:00</p>
+                        <button class="reserve-btn">预约体验</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notice-box">
+                <h2>⚠️ 游览须知</h2>
+                <ul>
+                    <li>城堡开放时间：8:00-22:00（最后入园20:00）</li>
+                    <li>禁止携带黑魔法物品及南瓜马车</li>
+                    <li>云朵露台需穿着特制防滑水晶鞋</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">✨ 返回童话王国入口</a>
+    </div>
+
+    <script>
+        
+        // 原有交互功能优化
+        const castleImage = document.getElementById('castleImage');
+        
+        // 新增预约按钮交互
+        document.querySelectorAll('.reserve-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.innerHTML = "🎉 预约成功！";
+                this.style.backgroundColor = "#ff69b4";
+                setTimeout(() => {
+                    this.innerHTML = "预约体验";
+                    this.style.backgroundColor = "";
+                }, 2000);
+            });
+        });
+
+        // 新增魔法特效
+        document.addEventListener('mousemove', (e) => {
+            const sparkle = document.createElement('div');
+            sparkle.style.cssText = `
+                position: fixed;
+                left: ${e.pageX}px;
+                top: ${e.pageY}px;
+                width: 8px;
+                height: 8px;
+                background: radial-gradient(#fff, #ffb6c1);
+                border-radius: 50%;
+                pointer-events: none;
+                animation: sparkle 1s forwards;
+            `;
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 1000);
+        });
+    </script>
+</body>
+</html>

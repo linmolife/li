@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>森林小伙伴 </title>
+    <link rel="stylesheet" href="starlight-spirits.css">
+</head>
+<body>
+    <div class="container">
+        <h1 data-text="森林小伙伴 ">森林小伙伴 </h1>
+        
+        <!-- 图片模态框 -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="expandedImg">
+        </div>
+
+        <img src="image/lunbo3.jpg" alt="森林小伙伴代表图" class="main-image" id="productImage">
+        
+        <div class="content">
+            <p class="animate-on-scroll">✨蹲下来捡起一张纸屑，你就是小蚂蚁眼中的超级英雄！</p>
+            <p>✨用拟人化角色传递温暖价值观，将自然元素转化为有生命力的“伙伴”，激发共情与行动力。</p>
+            
+            <p>🌙 治愈系互动话术：</p>
+            <ul>
+                <li>🌿“早安呀！小松鼠正在树梢囤松果，风精灵吹来了露水的味道～今天要和哪只森林伙伴一起探险呢？”</li>
+                <li>🌳“别怕天黑哦！猫头鹰会点亮星星灯，萤火虫巡逻队已出发，整个森林都在守护你的梦。”</li>
+                <li>🍂“落叶不是告别，它把金色还给泥土，等春天酿成新芽。森林里没有‘结束’，只有循环的拥抱。”</li>
+                <li>🐾“累了就靠在老树爷爷身边吧，它的年轮里藏着100个勇敢的故事，悄悄讲给你听……”</li>
+            </ul>
+
+            <p>🌟 环保场景：</p>
+            <p>拟人化共情 | 行动号召 | 节能意识 | 空间装饰 | 绿色世界</p>
+            
+            <p>⚠️ 注意事项：</p>
+            <p>禁带火种入林｜杜绝野外用火｜文明祭祀</p>
+            
+            <p>📜 森林安全依赖每个人的自觉行动。以敬畏之心对待自然，用文明之举守护绿色家园，让森林伙伴与我们共享生机🌿</p>
+        </div>
+
+        <a href="index.html" class="back-link">← 返回森林总部</a>
+    </div>
+
+    <!-- 新增JavaScript -->
+    <script>
+        // 图片点击放大功能
+        const productImage = document.getElementById('productImage');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById("expandedImg");
+        
+        productImage.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        // 关闭模态框
+        document.getElementsByClassName("close")[0].onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.6s ease-out';
+            observer.observe(element);
+        });
+
+        // 星光背景特效
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.background = 'rgba(255, 255, 255, ' + Math.random() + ')';
+                star.style.borderRadius = '50%';
+                star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
+                container.appendChild(star);
+            }
+        });
+    </script>
+
+    <style>
+        /* 新增动画 */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1200px;
+            animation: zoom 0.6s;
+        }
+
+        @keyframes zoom {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover {
+            color: #7ec8e3;
+        }
+    </style>
+</body>
+</html>

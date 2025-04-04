@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频展示 - 梦幻玩偶工坊</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .video-container {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255,182,193,0.3);
+        }
+
+        .video-player {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            border: 3px solid #ffb6c1;
+        }
+
+        @media (max-width: 768px) {
+            .video-player {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 复用原有导航栏 -->
+    <nav class="navbar">
+        <!-- 导航栏内容与index.html相同 -->
+    </nav>
+
+    <div class="video-container magic-box">
+        <h2 style="text-align: center; margin-bottom: 30px;">
+            ✨ 工坊视频展示 ✨
+        </h2>
+        <video class="video-player" controls muted playsinline>
+            <source src="https://github.com/linmolife/li/video/xiaoxiong.mp4" type="video/mp4">
+        </video>
+        <div style="margin-top: 30px; text-align: center;"> </div>
+    </div>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> 返回首页
+    </a>
+
+    <!-- 复用原有页脚 -->
+    <footer class="main-footer">
+        <!-- 页脚内容与index.html相同 -->
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

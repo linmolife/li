@@ -17,14 +17,26 @@
                 <button class="mobile-menu-btn">☰</button>
                 <div class="nav-links">
                     <a href="chanping.html">产品系列</a>
+                    <a href="video.html">动画灵动</a>
                     <a href="guanyuwomen.html">关于我们</a>
                     <a href="#custom">定制服务</a>
                     <a href="#contact">联系我们</a>
+                    <a href="login.html" class="login-link">登录</a>
+                    <a href="register.html">注册</a>
                 </div>
-                <div class="search-box">
-                    <input type="text" placeholder="搜索玩偶...">
-                    <button type="submit"><img src="image/搜索图标png.png" alt="搜索"></button>
-                </div>
+                <!-- 修改搜索框结构 -->
+<div class="search-box">
+    <div class="search-input-container">
+        <input type="text" id="searchInput" placeholder="搜索玩偶..." autocomplete="off">
+        <button type="submit" class="search-btn">
+            <img src="image/搜索图标png.png" alt="搜索">
+        </button>
+    </div>
+    <!-- 新增推荐和结果容器 -->
+    <div class="search-results-container">
+        <div class="search-results"></div>
+    </div>
+</div>
             </div>
         </nav>
 
@@ -36,22 +48,28 @@
             <div class="carousel-item active">
                 <img src="image/lunbo1.jpg" alt="魔法玩偶系列">
                 <div class="carousel-caption">
+                    <a href="starlight-spirits.html" class="nav-link">
                     <h3>✨ 星光精灵系列 ✨</h3>
                     <p>夜光材质 | 可换装设计 | 会唱摇篮曲</p>
+                    </a>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="image/lunbo2.jpg" alt="公主系列">
                 <div class="carousel-caption">
+                    <a href="starlight-spirits2.html" class="nav-link">
                     <h3>👑 梦幻公主城堡 👑</h3>
                     <p>配首饰盒 | 磁吸换装 | 丝绸礼服</p>
+                    </a>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="image/lunbo3.jpg" alt="动物伙伴">
                 <div class="carousel-caption">
+                    <a href="starlight-spirits3.html" class="nav-link">
                     <h3>🐾 森林小伙伴 🐾</h3>
                     <p>会讲故事 | 毛绒手感 | 安全材质</p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -75,9 +93,11 @@
                 </div>
                 </a>
                 <div class="product-item magic-box">
+                    <a href="music.html" style="text-decoration: none; color: inherit;">
                     <div class="product-icon">👸</div>
                     <h3>皇家公主系列</h3>
                     <p>带首饰盒的换装公主</p>
+                    </a>
                 </div>
                 <div class="product-item magic-box">
                     <div class="product-icon">🐻</div>
@@ -87,7 +107,7 @@
             </div>
         </div>
 
-        <!-- 新增三大主题 -->
+        <!-- 三大主题 -->
         <!-- 星座系列 -->
         <div class="theme-group constellation">
             <h2 class="theme-title">

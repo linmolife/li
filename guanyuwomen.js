@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initDynamicEffects();
     // 表单提交成功
     initFormSubmission();
+    // 登录功能
+    initLoginModal(); 
 });
 
 // 平滑滚动功能
@@ -44,27 +46,6 @@ function initResponsiveNav() {
     }
     updateNavDisplay();
     window.addEventListener('resize', updateNavDisplay);
-}
-
-// 移动端导航菜单功能
-function initMobileMenu() {
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    
-    menuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
-    });
-    
-    // 点击链接后自动关闭菜单
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-                menuBtn.innerHTML = '☰';
-            }
-        });
-    });
 }
 
 // 点击爱心特效
@@ -189,6 +170,25 @@ function handleShareClick() {
     }
 }
 
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+    
+    // 点击链接后自动关闭菜单
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            }
+        });
+    });
+}
 // 表单功能优化
 function initFormFeatures() {
     const form = document.querySelector('.custom-form');

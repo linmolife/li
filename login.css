@@ -1,0 +1,186 @@
+:root {
+    --primary-color: #ff85a2;
+    --secondary-color: #ffc8dd;
+    --accent-color: #ff6392;
+    --radius: 30px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', sans-serif;
+}
+
+body {
+    background: linear-gradient(145deg, #fff0f3, #ffffff);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.login-container {
+    max-width: 500px;
+    width: 100%;
+    padding: 2.5rem;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 15px 35px rgba(255, 135, 162, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23ff85a2" opacity="0.1" d="M50 30c15-25 40-10 40 10 0 20-40 40-40 40S10 60 10 40C10 20 35 5 50 30z"/></svg>');
+    background-size: contain;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+.login-container::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 100px;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23ff6392" opacity="0.1" d="M50 30c15-25 40-10 40 10 0 20-40 40-40 40S10 60 10 40C10 20 35 5 50 30z"/></svg>');
+    background-size: contain;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.login-header h2 {
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.login-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.login-form {
+    position: relative;
+    z-index: 1;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.8rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 1.5rem;
+    border: 2px solid #ffe8e8;
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 135, 162, 0.2);
+    outline: none;
+}
+
+.form-group i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.remember-me input {
+    margin-right: 0.8rem;
+}
+
+.remember-me label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    width: 100%;
+    padding: 1.2rem;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 99, 146, 0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 99, 146, 0.4);
+}
+
+.login-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ffe8e8;
+}
+
+.login-footer a {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.login-footer a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+    
+    .login-header h2 {
+        font-size: 1.5rem;
+    }
+}

@@ -143,3 +143,102 @@
         height: 350px;
     }
 }
+/* 系列筛选下拉菜单样式 */
+.series-filter {
+    position: sticky;
+    top: 80px;
+    z-index: 999;
+    max-width: 300px;
+    margin: 1rem auto 2rem;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(255,99,146,0.1);
+}
+
+.filter-select {
+    width: 100%;
+    padding: 1rem 2rem;
+    border: none;
+    background: transparent;
+    appearance: none;
+    font-size: 1.1rem;
+    color: var(--pink-3);
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.series-filter i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--pink-3);
+    pointer-events: none;
+}
+
+.filter-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--pink-2);
+}
+/* 下拉菜单样式 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(255,255,255,0.95);
+    min-width: 200px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 1000;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.dropdown-content a {
+    color: var(--pink-3);
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255,200,221,0.3);
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background: rgba(255,200,221,0.2);
+    transform: translateX(5px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: static;
+        background: transparent;
+        box-shadow: none;
+    }
+    
+    .dropdown-content a {
+        padding: 0.8rem 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        color: white;
+    }
+}

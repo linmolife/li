@@ -132,6 +132,89 @@
     transform: scale(1.1);
     filter: drop-shadow(0 0 4px rgba(255,99,146,0.7)); /* 悬停时光晕增强 */
 }
+/* 搜索框增强样式 */
+.search-input-container {
+    position: relative;
+    display: flex;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid #ffb6c1;
+    border-radius: 30px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.search-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-results-container {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    margin-top: 10px;
+    z-index: 1000;
+}
+
+.search-suggestions {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.suggestion-item:hover {
+    background: #fff5f7;
+}
+
+.search-results {
+    background: white;
+    border-radius: 15px;
+    margin-top: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.result-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.result-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.no-results {
+    padding: 20px;
+    color: #ff6b6b;
+    text-align: center;
+}
+
+.highlight {
+    background: #fff3b7;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
 /* ===== 导航栏响应式设计 ===== */
 @media (max-width: 768px) {
     .navbar {
@@ -1304,4 +1387,871 @@ a:focus,
 .product-item h3,
 .feature-card h3 {
     text-decoration: none !important;
+}
+
+
+
+
+/* ===== 登录按钮样式 ===== */
+.login-btn {
+    background: linear-gradient(135deg, #ff6392, #ff85a2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(255, 99, 146, 0.3);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 99, 146, 0.4);
+}
+
+/* ===== 登录模态框样式 ===== */
+.login-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #fff0f3, #ffffff);
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 135, 162, 0.3);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content h2 {
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #aaa;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: var(--accent-color);
+}
+
+/* 登录表单样式 */
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    border: 2px solid var(--pink-1);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: var(--pink-2);
+    box-shadow: 0 0 10px rgba(255, 99, 146, 0.2);
+}
+
+.login-form i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--pink-2);
+}
+
+/* 记住我复选框样式 */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.remember-me input {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+/* 登录页脚链接 */
+.login-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.login-footer a {
+    color: var(--pink-2);
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.login-footer a:hover {
+    color: var(--accent-color);
+    text-decoration: underline !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .login-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+        margin-left: 0.5rem;
+    }
+    
+    .modal-content {
+        margin: 20% auto;
+        padding: 1.5rem;
+    }
+}
+@media (max-width: 768px) {
+    /* 导航栏登录按钮移动端样式 */
+    .login-btn {
+        margin: 0.5rem auto;
+        width: 80%;
+        order: 4; /* 确保在移动端显示在导航链接下方 */
+    }
+    
+    /* 移动端导航菜单中的登录按钮 */
+    .nav-links .login-btn {
+        background: transparent;
+        border: 2px solid white;
+        margin: 0.5rem auto;
+        width: 80%;
+        box-shadow: none;
+    }
+}
+
+
+
+
+
+
+
+/* ===== 忘记密码页面样式 ===== */
+.forgot-password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #fff0f3 0%, #ffffff 100%);
+}
+
+.forgot-password-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(255, 135, 162, 0.2);
+    width: 100%;
+    max-width: 500px;
+    z-index: 1;
+    position: relative;
+    border: 2px solid rgba(255, 200, 221, 0.5);
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.forgot-password-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 99, 146, 0.25);
+}
+
+.password-header {
+    margin-bottom: 2.5rem;
+}
+
+.password-header h2 {
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin: 1rem 0 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.password-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--secondary-color);
+    transition: all 0.4s ease;
+}
+
+.password-header p {
+    color: #666;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.password-icon {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    display: inline-block;
+    text-shadow: 0 0 10px rgba(255, 99, 146, 0.3);
+    animation: bounce 1.5s infinite;
+}
+
+.password-form {
+    margin-top: 2rem;
+}
+
+.password-form .form-group {
+    margin-bottom: 1.8rem;
+    text-align: left;
+}
+
+.password-form .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+    position: relative;
+    padding-left: 1.8rem;
+}
+
+.password-form .form-group label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.password-form .form-group input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 1.5rem;
+    border: 2px solid var(--pink-1);
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    transition: 0.3s ease;
+    background: #fff;
+}
+
+.password-form .form-group input:focus {
+    border-color: var(--pink-2);
+    box-shadow: 0 4px 15px rgba(255, 99, 146, 0.2);
+}
+
+.password-form .form-group i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--pink-2);
+    font-size: 1.2rem;
+}
+
+.password-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 200, 221, 0.5);
+}
+
+.password-footer a {
+    color: var(--pink-2);
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.password-footer a:hover {
+    color: var(--accent-color);
+    text-decoration: none !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .forgot-password-container {
+        padding: 1rem;
+        min-height: calc(100vh - 150px);
+    }
+    
+    .forgot-password-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .password-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .password-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+}
+/* 视频页面样式 */
+.back-btn {
+    background: #ff85a2;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    transition: all 0.3s;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background: #ff6b9d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,107,157,0.4);
+}
+
+/* 视频响应式设计 */
+@media (max-width: 768px) {
+    .video-container {
+        margin: 40px 15px;
+        padding: 15px;
+    }
+}
+
+
+/* 音乐播放器增强样式 */
+audio::-webkit-media-controls-panel {
+    background-color: #fff0f3;
+}
+
+audio::-webkit-media-controls-play-button {
+    background-color: #ff85a2;
+    border-radius: 50%;
+}
+
+audio::-webkit-media-controls-timeline {
+    background-color: #ffc8dd;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    color: #ff6392;
+}
+/* ===== 用户菜单样式 ===== */
+.user-menu {
+    position: relative;
+    cursor: pointer;
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    background: rgba(255,255,255,0.1);
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.user-greeting::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+.user-greeting:hover::before {
+    transform: translateX(0);
+}
+
+.user-greeting i:first-child {
+    font-size: 1.1rem;
+    margin-right: 0.3rem;
+    color: #ffeb3b;
+    text-shadow: 0 0 5px rgba(255,235,59,0.5);
+}
+
+.user-greeting span {
+    position: relative;
+    z-index: 1;
+}
+
+.user-greeting:hover {
+    color: white;
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255,99,146,0.2);
+    padding: 0.5rem 0;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+    border: 1px solid rgba(255,200,221,0.5);
+    transform: translateY(10px);
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    right: 15px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.05));
+}
+
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    color: var(--accent-color);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-align: left;
+    gap: 0.8rem;
+}
+
+.user-dropdown a i {
+    width: 20px;
+    text-align: center;
+    color: var(--pink-2);
+}
+
+.user-dropdown a:hover {
+    background: linear-gradient(135deg, var(--pink-1), white);
+    color: var(--pink-3);
+    padding-left: 1.8rem;
+}
+
+.user-dropdown a:hover i {
+    color: var(--pink-3);
+    animation: bounce 0.5s;
+}
+
+.logout-btn {
+    color: #ff4757 !important;
+}
+
+.logout-btn i {
+    color: #ff4757 !important;
+}
+
+/* 移动端用户菜单样式 */
+@media (max-width: 768px) {
+    .user-menu {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .user-greeting {
+        width: 100%;
+        justify-content: center;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        padding: 1rem;
+    }
+    
+    .user-dropdown {
+        position: static;
+        background: rgba(255,255,255,0.1);
+        box-shadow: none;
+        border: none;
+        display: none;
+        width: 100%;
+        text-align: center;
+        border-radius: 0;
+        padding: 0;
+        transform: none !important;
+    }
+    
+    .user-dropdown::before {
+        display: none;
+    }
+    
+    .user-menu:hover .user-dropdown,
+    .user-menu.active .user-dropdown {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .user-dropdown a {
+        color: white;
+        padding: 0.8rem;
+        justify-content: center;
+    }
+    
+    .user-dropdown a:hover {
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+    
+    .logout-btn {
+        color: #ffccd5 !important;
+    }
+}
+/* ===== 导航栏样式优化 ===== */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 0.8rem 0;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+}
+
+/* 优化logo样式 */
+.logo {
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 101; /* 确保在移动菜单上方 */
+}
+
+/* 主导航链接优化 */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: #fff;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: #ff903b;
+    text-shadow: 0 0 8px rgba(255,235,59,0.5);
+}
+
+/* 添加导航链接下划线效果 */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ff903b;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* 登录/注册按钮优化 */
+.login-link, .nav-links a[href="register.html"] {
+    background: rgba(255,255,255,0.2);
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    margin-left: 0.5rem;
+    transition: all 0.3s;
+}
+
+.login-link:hover, .nav-links a[href="register.html"]:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+/* 搜索框优化 */
+.search-box {
+    margin-left: 1.5rem;
+    position: relative;
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-input-container {
+    position: relative;
+    width: 100%;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.6rem 2.5rem 0.6rem 1rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.9);
+}
+
+#searchInput:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--secondary-color);
+}
+
+.search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--accent-color);
+}
+
+/* 移动菜单按钮优化 */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 101;
+    padding: 0.5rem;
+    transition: transform 0.3s;
+}
+
+.mobile-menu-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* ===== 移动端响应式优化 ===== */
+@media (max-width: 992px) {
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .search-box {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-wrap: wrap;
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+        order: 1;
+    }
+    
+    .logo {
+        order: 0;
+        flex: 1;
+    }
+    
+    .search-box {
+        order: 3;
+        max-width: 100%;
+        margin: 1rem 0 0 0;
+        display: none;
+    }
+    
+    .search-box.active {
+        display: block;
+    }
+    
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        padding: 1rem 0;
+        z-index: 100;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links a {
+        padding: 0.8rem 1.5rem;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-links a::after {
+        display: none;
+    }
+    
+    .login-link, .nav-links a[href="register.html"] {
+        margin: 0.5rem auto;
+        width: 80%;
+        display: block;
+        background: rgba(255,255,255,0.1);
+    }
+}
+
+/* 搜索建议和结果框优化 */
+.search-results-container {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    margin-top: 5px;
+    z-index: 100;
+}
+
+.search-suggestions, .search-results {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-suggestions {
+    padding: 0.5rem;
+}
+
+.suggestion-item {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.suggestion-item:hover {
+    background: #fff5f7;
+}
+
+.search-results {
+    margin-top: 5px;
+}
+
+.result-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.result-item:hover {
+    background: #fff5f7;
+}
+
+.result-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    margin-right: 1rem;
+    object-fit: cover;
+}
+
+.result-item h4 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+}
+
+.result-item p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+}
+
+.no-results {
+    padding: 1.5rem;
+    text-align: center;
+    color: #ff6b6b;
 }

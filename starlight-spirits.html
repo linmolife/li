@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星光精灵系列</title>
+    <link rel="stylesheet" href="starlight-spirits.css">
+</head>
+<body>
+    <div class="container">
+        <h1 data-text="星光精灵系列">星光精灵系列</h1>
+        
+        <!-- 图片模态框 -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="expandedImg">
+        </div>
+
+        <img src="image/lunbo1.jpg" alt="星光精灵产品图" class="main-image" id="productImage">
+        
+        <div class="content">
+            <!--增加一些交互类 -->
+            <p class="animate-on-scroll">✨ 星光精灵系列是我们与自然精灵合作研发的魔法结晶...</p>
+            <p>✨ 星光精灵系列是我们与自然精灵合作研发的魔法结晶。每一件产品都蕴含星辰之力，在月光下经过七七四十九天的淬炼而成。</p>
+            
+            <p>🌙 产品特性：</p>
+            <ul>
+                <li>采用银河系边缘采集的星尘粉末</li>
+                <li>内置微型星光储能核心</li>
+                <li>自动感应环境光线调节亮度</li>
+                <li>可持续发光99年无需充能</li>
+            </ul>
+
+            <p>🌟 使用场景：</p>
+            <p>夜晚导航 | 冥想辅助 | 魔法仪式 | 空间装饰 | 紧急照明</p>
+            
+            <p>⚠️ 注意事项：</p>
+            <p>请勿放置在完全黑暗环境超过7天｜避免与黑魔法物品共同存放｜接触水元素后需月光晾晒</p>
+            
+            <p>📜 古老预言记载："当群星归位之时，持有星光之物者将获得穿越梦境的能力。"</p>
+        </div>
+
+        <a href="index.html" class="back-link">← 返回星际总部</a>
+    </div>
+
+    <!-- 新增JavaScript -->
+    <script>
+        // 图片点击放大功能
+        const productImage = document.getElementById('productImage');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById("expandedImg");
+        
+        productImage.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        // 关闭模态框
+        document.getElementsByClassName("close")[0].onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.6s ease-out';
+            observer.observe(element);
+        });
+
+        // 星光背景特效
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.background = 'rgba(255, 255, 255, ' + Math.random() + ')';
+                star.style.borderRadius = '50%';
+                star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite`;
+                container.appendChild(star);
+            }
+        });
+    </script>
+
+    <style>
+        /* 新增动画 */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1200px;
+            animation: zoom 0.6s;
+        }
+
+        @keyframes zoom {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover {
+            color: #7ec8e3;
+        }
+    </style>
+</body>
+</html>

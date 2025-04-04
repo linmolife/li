@@ -119,8 +119,8 @@ function initMobileMenu() {
         menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
     });
     
-    // 点击链接后自动关闭菜单
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    // 点击链接后自动关闭菜单（包括登录按钮）
+    document.querySelectorAll('.nav-links a, .nav-links .login-btn').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
                 navLinks.classList.remove('active');
@@ -395,3 +395,425 @@ function initAllFeatures() {
 
 // 页面加载完成后执行初始化
 document.addEventListener('DOMContentLoaded', initAllFeatures);
+// 修改移动端菜单点击处理
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        // 如果是下拉菜单项则不关闭菜单
+        if(!e.target.closest('.dropdown-content')) {
+            if (window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '☰';
+            }
+        }
+    });
+});
+
+// 处理下拉菜单点击
+document.querySelectorAll('.dropdown-content a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            navLinks.classList.remove('active');
+            menuBtn.innerHTML = '☰';
+        }
+    });
+});
+
+// ===== 登录功能 =====
+function initLoginModal() {
+    const loginBtn = document.getElementById('loginBtn');
+    const modal = document.getElementById('loginModal');
+    const closeBtn = document.querySelector('.close-btn');
+    const loginForm = document.querySelector('.login-form');
+    
+    // 打开模态框
+    loginBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 防止背景滚动
+    });
+    
+    // 关闭模态框
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // 点击模态框外部关闭
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // 表单提交处理
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const remember = document.getElementById('remember').checked;
+        
+        // 这里可以添加实际的登录逻辑
+        console.log('登录信息:', { username, password, remember });
+        
+        // 模拟登录成功
+        Swal.fire({
+            icon: 'success',
+            title: '登录成功',
+            text: '欢迎回来！',
+            confirmButtonColor: '#ff85a2'
+        });
+        
+        // 关闭模态框
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // 更新登录按钮状态
+        loginBtn.textContent = username;
+        loginBtn.style.backgroundColor = '#4CAF50';
+    });
+}
+
+// 在 initAllFeatures 函数中添加初始化登录功能
+function initAllFeatures() {
+    initCarousel();
+    handleResponsiveNav();
+    initMobileMenu();
+    initProductItemInteraction();
+    initHeartEffect();
+    initSmoothScroll();
+    initFormSubmission();
+    initShareAndTopButton();
+    initFeaturesAnimation();
+    initLoginModal(); // 添加这行
+}
+
+
+
+
+
+// ===== 忘记密码功能 =====
+function initForgotPassword() {
+    // 返回登录链接
+    const loginLink = document.getElementById('loginLink');
+    if (loginLink) {
+        loginLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'index.html#loginModal';
+        });
+    }
+    
+    // 表单提交处理
+    const form = document.getElementById('forgotPasswordForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 显示加载状态
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 发送中...';
+            submitBtn.disabled = true;
+            
+            // 模拟发送邮件
+            setTimeout(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '邮件已发送',
+                    html: '<div class="success-message">' +
+                          '<i class="fas fa-paper-plane"></i>' +
+                          '<p>请检查您的邮箱并按照指示重置密码</p>' +
+                          '</div>',
+                    confirmButtonColor: '#ff85a2',
+                    customClass: {
+                        popup: 'custom-swal-popup',
+                        title: 'custom-swal-title'
+                    }
+                });
+                
+                // 重置按钮状态
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+    }
+}
+
+/**
+ * 检查登录状态并更新导航栏
+ */
+/**
+ * 检查登录状态并更新导航栏
+ */
+function updateNavForLoggedInUser() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (!navLinks) return;
+    
+    const loginLink = navLinks.querySelector('a[href="login.html"]');
+    const registerLink = navLinks.querySelector('a[href="register.html"]');
+    
+    if (currentUser) {
+        // 创建用户菜单
+        const userMenu = document.createElement('div');
+        userMenu.className = 'user-menu';
+        userMenu.innerHTML = `
+            <div class="user-greeting">
+                <i class="fas fa-user"></i>
+                <span>${currentUser.username}</span>
+            </div>
+            <div class="user-dropdown">
+                <a href="#" class="logout-btn">退出登录</a>
+            </div>
+        `;
+        
+        // 替换或添加用户菜单
+        if (loginLink) {
+            loginLink.replaceWith(userMenu);
+        } else {
+            // 如果没有找到登录链接，就添加到导航链接末尾
+            navLinks.appendChild(userMenu);
+        }
+        
+        // 隐藏注册按钮
+        if (registerLink) {
+            registerLink.style.display = 'none';
+        }
+        
+        // 添加退出登录事件
+        const logoutBtn = userMenu.querySelector('.logout-btn');
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        });
+    } else {
+        // 如果用户未登录，确保注册按钮显示
+        if (registerLink) {
+            registerLink.style.display = 'block';
+        }
+    }
+}
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (!menuBtn || !navLinks) return;
+    
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+    
+    // 点击链接后自动关闭菜单（包括用户菜单）
+    document.querySelectorAll('.nav-links > a, .nav-links .user-greeting').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                // 如果是用户菜单，只切换下拉菜单
+                if (link.classList.contains('user-greeting')) {
+                    e.preventDefault();
+                    link.closest('.user-menu').classList.toggle('active');
+                } else {
+                    navLinks.classList.remove('active');
+                    menuBtn.innerHTML = '☰';
+                }
+            }
+        });
+    });
+}
+// 在 initAllFeatures 函数中添加初始化忘记密码功能
+function initAllFeatures() {
+    updateNavForLoggedInUser(); // 检查登录状态并更新导航栏
+    initCarousel();
+    handleResponsiveNav();
+    initMobileMenu();
+    initProductItemInteraction();
+    initHeartEffect();
+    initSmoothScroll();
+    initFormSubmission();
+    initShareAndTopButton();
+    initFeaturesAnimation();
+    initLoginModal();
+    initForgotPassword(); // 展示成功样式
+}
+// 视频自动播放控制
+document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('click', () => {
+        video.paused ? video.play() : video.pause();
+    });
+    
+    // 离开页面时暂停播放
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) video.pause();
+    });
+});
+
+
+
+
+
+
+
+// 模拟数据关于搜索框的
+const dollProducts = [
+    {
+        name: '精品玩偶',
+        series: '童话精灵系列',
+        desc: '童话星座系列',
+        tags: ['会唱歌', '夜光', '换装'],
+        img: 'image/fairy1.jpg',
+        link: 'gallery.html#fairy'
+    },
+    {
+        name: '魔法星座系列',
+        series: '魔法星座系列',
+        desc: '魔法星座系列',
+        tags: ['会唱歌', '夜光', '换装'],
+        img: 'image/fairy2.jpg',
+        link: 'gallery.html#fairy'
+    },
+    {
+        name: '星光精灵系列',
+        series: '星光精灵系列',
+        desc: '星光星座系列',
+        tags: ['会唱歌', '夜光', '灵动可爱'],
+        img: 'image/lunbo1.jpg',
+        link: 'starlight-spirits.html#fairy'
+    },
+    {
+        name: '梦幻公主城堡',
+        series: '梦幻精灵系列',
+        desc: '童话世界',
+        tags: [ "配首饰盒" ,"磁吸换装","丝绸礼服"],
+        img: 'image/lunbo2.jpg',
+        link: 'starlight-spirits2.html#fairy'
+    },
+    {
+        name: '森林小伙伴系列',
+        series: '森林精灵系列',
+        desc: '治愈话语',
+        tags: [ "会讲故事","毛绒手感","安全材质"],
+        img: 'image/lunbo3.jpg',
+        link: 'starlight-spirits3.html#fairy'
+    },
+    {
+        name: '皇家公主系列',
+        series: '童话精灵系列',
+        desc: '音乐享受系列',
+        tags: ['会唱歌', '夜光', '灵动可爱'],
+        img: 'image/cp6.jpg',
+        link: 'music.html#fairy'
+    },
+    // 添加更多产品数据...
+];
+
+// 搜索功能实现
+const searchInput = document.getElementById('searchInput');
+const suggestionsBox = document.querySelector('.search-suggestions');
+const resultsBox = document.querySelector('.search-results');
+
+// 防抖函数
+function debounce(func, delay=300) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// 高亮文本
+function highlightText(text, query) {
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<span class="highlight">$1</span>');
+}
+
+// 显示搜索结果
+function showResults(results, query) {
+    resultsBox.innerHTML = '';
+    
+    if(results.length === 0) {
+        resultsBox.innerHTML = `<div class="no-results">没有找到"${query}"相关结果</div>`;
+        return;
+    }
+
+    results.forEach(product => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        item.innerHTML = `
+            <img src="${product.img}" alt="${product.name}">
+            <div>
+                <h4>${highlightText(product.name, query)}</h4>
+                <p>系列：${highlightText(product.series, query)}</p>
+                <p>${highlightText(product.desc, query)}</p>
+            </div>
+        `;
+        item.addEventListener('click', () => {
+            window.location.href = product.link;
+        });
+        resultsBox.appendChild(item);
+    });
+}
+
+// 显示搜索建议
+function showSuggestions(suggestions) {
+    suggestionsBox.innerHTML = suggestions
+        .map(s => `<div class="suggestion-item">${s}</div>`)
+        .join('');
+    
+    document.querySelectorAll('.suggestion-item').forEach(item => {
+        item.addEventListener('click', () => {
+            searchInput.value = item.textContent;
+            performSearch(item.textContent);
+        });
+    });
+}
+
+// 执行搜索
+function performSearch(query) {
+    const normalizedQuery = query.trim().toLowerCase();
+    
+    if(normalizedQuery === '') {
+        suggestionsBox.innerHTML = '';
+        resultsBox.innerHTML = '';
+        return;
+    }
+
+    // 搜索逻辑
+    const results = dollProducts.filter(product => {
+        return Object.values(product).some(value => 
+            String(value).toLowerCase().includes(normalizedQuery)
+        );
+    });
+
+    // 获取建议关键词
+    const suggestions = Array.from(new Set(
+        dollProducts.flatMap(product => {
+            // 确保 tags 是一个数组
+            if (Array.isArray(product.tags)) {
+                return product.tags.filter(tag => 
+                    tag.toLowerCase().includes(normalizedQuery)
+                );
+            } else {
+                console.error(`Product with name "${product.name}" has invalid tags property`);
+                return [];
+            }
+        })
+    )).slice(0, 5);
+
+    showResults(results, normalizedQuery);
+    showSuggestions(suggestions);
+}
+
+// 事件监听
+searchInput.addEventListener('input', debounce(() => {
+    performSearch(searchInput.value);
+}));
+
+// 点击外部关闭结果
+document.addEventListener('click', (e) => {
+    if(!e.target.closest('.search-box')) {
+        suggestionsBox.innerHTML = '';
+        resultsBox.innerHTML = '';
+    }
+});
